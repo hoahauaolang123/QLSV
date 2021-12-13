@@ -9,5 +9,6 @@ namespace QLSV.Data
         public string MaLop { get; set; }
         public string TenLop { get; set; }
         public virtual IEnumerable<ThongTinSinhVien> ThongTinSinhVien { get; set; }
+        public virtual IEnumerable<TKBGV>TKBGV { get; set; }
     }
 }

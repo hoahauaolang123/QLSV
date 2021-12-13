@@ -1,6 +1,6 @@
 ﻿namespace QLSV.Model
 {
-    public class MLop:MSinhVien
+    public class MLop
     {
      
         public string MaLop { get; set; }
