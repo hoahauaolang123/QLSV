@@ -60,6 +60,21 @@ namespace QLSV.Controllers
                 return NoContent();
             }
         }
+        [HttpGet("/thongtinhoc/{Id}")]
+        public IActionResult GetThongTinHoc([FromRoute] string Id)
+        {
+            var lists = from a in _Context.Lop
+                        join b in _Context.TKBGV on a.MaLop equals b.MaLop
+                        where a.MaLop == Id
+                        orderby b.TimeDay descending
+                        select new
+                        {
+                            tenlop = a.TenLop,
+                            MonHoc = b.MonHoc,
+                            TimeHoc = b.TimeDay
+                        };
+            return Ok(lists);
+        }
         [HttpPost]
         public IActionResult Post([FromBody] MLop request)
         {

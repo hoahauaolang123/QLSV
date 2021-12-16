@@ -12,6 +12,7 @@ namespace QLSV.Model
         public string TenLop { get; set; }
         public string TenMH { get; set; }
         public DateTime? TimeDay { get; set; }
+        
 
     }
 }

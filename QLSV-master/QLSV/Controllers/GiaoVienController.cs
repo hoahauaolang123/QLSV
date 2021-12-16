@@ -60,6 +60,30 @@ namespace QLSV.Controllers
                 return NoContent();
             }
         }
+        [HttpGet("/thongtingiaoviendaymon/{Id}")]
+        public IActionResult GetThongTinGiaoVienDayMon([FromRoute] string Id)
+        {
+            try
+            {
+
+                var giaoVien = from a in _Context.GiaoVien
+                               join b in _Context.TKBGV on a.MaGV equals b.MaGV
+                               where a.MaGV == Id
+                               orderby b.TimeDay descending
+                               select new
+                               {
+                                   TenGV = a.TenGV,
+                                   MonDay = b.MonHoc,
+                                   TimeDay = b.TimeDay,                              
+                               };
+                return Ok(giaoVien);
+                               
+            }
+            catch (Exception)
+            {
+                return NoContent();
+            }
+        }
         [HttpPost]
         public IActionResult Post([FromBody] MGiaoVien request)
         {
@@ -68,7 +92,7 @@ namespace QLSV.Controllers
             
             try
             {
-                var checkMaGV = _Context.GiaoVien.Where(x => x.MaGV == request.MaGV);
+                var checkMaGV = _Context.GiaoVien.Find(request.MaGV);
                 if(checkMaGV != null)
                 {
                     return Ok("trùng mã");

@@ -14,7 +14,7 @@ namespace QLSV.Data
         public  DbSet<MonHoc> MonHoc { get; set; }
         public DbSet<Lop> Lop { get; set; }
         public DbSet<SinhVien> SinhVien { get; set; }
-        public  DbSet<ThongTinSinhVien> ThongTinSinhVien { get; set; }
+     
         public DbSet<TKBGV> TKBGV { get; set; }
    
 

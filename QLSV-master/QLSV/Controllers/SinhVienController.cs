@@ -60,6 +60,44 @@ namespace QLSV.Controllers
                 return NoContent();
             }
         }
+        [HttpGet("/thongtinsinhvienlop/{Id}")]
+        public IActionResult GetSinhVienLop([FromRoute] string Id)
+        {
+            try
+            {
+                var sinhViens = from a in _Context.SinhVien
+                                where a.MaLop == Id
+                                select a;
+                if (sinhViens == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok(sinhViens);
+                }
+            }
+            catch (Exception)
+            {
+                return NoContent();
+            }
+        }
+       [HttpGet("/thongtinsinhvienhoc/{Id}")]
+        public IActionResult GetTKBSV([FromRoute] string Id)
+        {
+            var sinhVien = from a in _Context.SinhVien
+                           join b in _Context.TKBGV on a.MaLop equals b.MaLop
+                           where a.MaSV == Id
+                           select new
+                           {
+                               maSV = a.MaSV,
+                               tenSV = a.TenSV,
+                               monHoc = b.MonHoc,
+                               thoiGian = b.TimeDay
+                           };
+            return Ok(sinhVien);
+                           
+        }
         [HttpPost]
         public IActionResult Post([FromBody] MSinhVien request)
         {
@@ -76,9 +114,12 @@ namespace QLSV.Controllers
                 else
                 {
                     sinhVien.MaSV = request.MaSV;
+                    
                     sinhVien.TenSV = request.TenSV;
+                    sinhVien.MaLop = request.MaLop;
+                    sinhVien.TenLop = request.TenLop;
                     sinhVien.Email = request.Email;
-                    sinhVien.Sdt = request.Sdt;
+                    sinhVien.SDT = request.SDT;
                     sinhVien.Diachi = request.Diachi;
                   
                     _Context.SinhVien.Add(sinhVien);
@@ -113,8 +154,10 @@ namespace QLSV.Controllers
                 {
 
                     sinhVien.TenSV = request.TenSV;
+                    sinhVien.MaLop = request.MaLop;
+                    sinhVien.TenLop = request.TenLop;
                     sinhVien.Email = request.Email;
-                    sinhVien.Sdt = request.Sdt;
+                    sinhVien.SDT = request.SDT;
                     sinhVien.Diachi = request.Diachi;
                     _Context.SaveChanges();
                     return Ok(sinhVien);

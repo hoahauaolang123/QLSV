@@ -70,10 +70,9 @@ namespace QLSV.Controllers
                 tKBGV.MaGV = request.MaGV;
                 tKBGV.MaLop = request.MaLop;
                 tKBGV.MaMH= request.MaMH;
-                tKBGV.TenGV = request.TenGV;
-                tKBGV.TenLop = request.TenLop;
-                tKBGV.TenMH =request.TenMH;
+               
                 tKBGV.TimeDay = request.TimeDay;
+           
 
                 _Context.TKBGV.Add(tKBGV);
                 _Context.SaveChanges();
@@ -102,10 +101,9 @@ namespace QLSV.Controllers
                     tKBGV.MaGV = request.MaGV;
                     tKBGV.MaLop = request.MaLop;
                     tKBGV.MaMH = request.MaMH;
-                    tKBGV.TenGV = request.TenGV;
-                    tKBGV.TenLop = request.TenLop;
-                    tKBGV.TenMH = request.TenMH;
+                 
                     tKBGV.TimeDay = request.TimeDay;
+              
 
                     _Context.SaveChanges();
                     return Ok(tKBGV);
